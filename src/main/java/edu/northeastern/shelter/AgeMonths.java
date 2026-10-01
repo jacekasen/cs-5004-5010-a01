@@ -68,7 +68,7 @@ public final class AgeMonths {
    * @return the number of complete years, never negative
    */
   public int years() {
-    throw new UnsupportedOperationException("TODO: implement years()");
+    return months / 12;
   }
 
   /**
@@ -79,7 +79,7 @@ public final class AgeMonths {
    * @return a value in the range 0 to 11 inclusive
    */
   public int remainderMonths() {
-    throw new UnsupportedOperationException("TODO: implement remainderMonths()");
+    return months % 12;
   }
 
   /**
@@ -88,7 +88,7 @@ public final class AgeMonths {
    * @return {@code true} if this age is less than twelve months
    */
   public boolean isUnderOneYear() {
-    throw new UnsupportedOperationException("TODO: implement isUnderOneYear()");
+    return months < 12;
   }
 
   /**
@@ -114,6 +114,29 @@ public final class AgeMonths {
    */
   @Override
   public String toString() {
-    throw new UnsupportedOperationException("TODO: implement toString()");
+    int years = years();
+    int remainder = remainderMonths();
+
+    String yearsPart;
+    if (years == 1) {
+      yearsPart = years + " year";
+    } else {
+      yearsPart = years + " years";
+    }
+
+    String monthsPart;
+    if (remainder == 1) {
+      monthsPart = remainder + " month";
+    } else {
+      monthsPart = remainder + " months";
+    }
+
+    if (isUnderOneYear()) {
+      return monthsPart;
+    }
+    if (remainder == 0) {
+      return yearsPart;
+    }
+    return yearsPart + ", " + monthsPart;
   }
 }
